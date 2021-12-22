@@ -1,0 +1,2 @@
+mSymbols = ['GOOG', 'MSFT', 'AMZN']
+API_Key = '9XSKGTHNPUOXKPCE'
