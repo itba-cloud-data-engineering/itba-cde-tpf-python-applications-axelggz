@@ -25,20 +25,19 @@ dag = dag.DAG(
     description='Dag de prueba para ITBA',
     catchup=False)
 
-def _proceso():
+def _etl():
     etl.uploadData()
 
 
 def _plot ():
-    # makePlot.makePlot()
-    print(makePlot.obtainSymbolData('GOOG'))
+    makePlot.makePlot()
 
 
 
 with dag:
-    proceso = PythonOperator(
-        task_id = 'proceso',
-        python_callable=_proceso,
+    etl = PythonOperator(
+        task_id = 'etl',
+        python_callable=_etl,
         retries = 10,
         retry_delay = timedelta(seconds = 3),
         provide_context=True
@@ -51,3 +50,5 @@ with dag:
         retry_delay = timedelta(seconds = 3),
         provide_context=True
     )
+
+    etl >> plot
